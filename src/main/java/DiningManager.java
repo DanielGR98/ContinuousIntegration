@@ -9,12 +9,12 @@ public class DiningManager {
     private static final Map<String, Double> menu = new HashMap<>();
 
     static {
-        menu.put("Spaghetti", 8.99);
-        menu.put("Pizza", 10.99);
-        menu.put("Dumplings", 7.99);
-        menu.put("Sushi", 12.99);
-        menu.put("Cake", 5.99);
-        menu.put("Chef's Special", 20.99);
+        menu.put("Spaghetti", 2.0);
+        menu.put("Pizza", 3.0);
+        menu.put("Dumplings", 1.0);
+        menu.put("Sushi", 3.0);
+        menu.put("Cake", 2.0);
+        menu.put("Chef's Special", 5.0);
         
         // Add more meals to the menu as needed
     }
@@ -68,19 +68,18 @@ public class DiningManager {
 
                 // Apply surcharge for Chef's Specials category
                 if (isChefSpecial(meal)) {
-                    baseCost *= 1.05;
+                    baseCost = baseCost + (baseCost*0.05);
                 }
 
                 totalCost += baseCost * quantity;
             }
         }
-
         // Apply discounts based on the total quantity
         int totalQuantity = selectedMeals.values().stream().mapToInt(Integer::intValue).sum();
         if (totalQuantity > 5 && totalQuantity <= 10) {
-            totalCost *= 0.9; // 10% discount
+            totalCost = totalCost - (totalCost*0.1); // 10% discount
         } else if (totalQuantity > 10) {
-            totalCost *= 0.8; // 20% discount
+        	totalCost = totalCost - (totalCost*0.2); // 20% discount
         }
 
         // Apply special offer discounts
